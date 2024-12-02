@@ -1,0 +1,108 @@
+.container {
+  padding: 40rpx;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  margin: 60rpx 0;
+  text-align: center;
+}
+
+.title-line {
+  display: block;
+  font-size: 48rpx;
+  font-weight: bold;
+  line-height: 1.5;
+  color: #333;
+}
+
+.recent-rooms {
+  flex: 1;
+  margin: 40rpx 0;
+}
+
+.section-title {
+  font-size: 32rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+}
+
+.room-list {
+  background: #fff;
+  border-radius: 12rpx;
+}
+
+.room-item {
+  padding: 30rpx;
+  border-bottom: 1rpx solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.room-item:last-child {
+  border-bottom: none;
+}
+
+.room-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.room-name {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.room-code {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.room-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.chip-amount {
+  color: #07c160;
+  font-weight: 500;
+}
+
+.player-count {
+  margin-right: 20rpx;
+}
+
+.bottom-buttons {
+  margin-top: auto;
+  padding: 40rpx 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  margin: 0;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 32rpx;
+  border-radius: 44rpx;
+  width: 48% !important;
+}
+
+.create-btn {
+  background: #07c160;
+  color: #fff;
+}
+
+.join-btn {
+  background: #fff;
+  color: #07c160;
+  border: 2rpx solid #07c160;
+}

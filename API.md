@@ -1,0 +1,98 @@
+1. **用户管理接口 👥**
+    - **用户修改昵称**
+        - **URL:** `/api/user/update-nickname`
+        - **方法:** POST
+        - **参数:**
+            - `nickname`: 用户昵称
+        - **返回:**
+            - `retCode`: 请求结果代码，如 `SUCCESS` | `FAIL`
+    - 
+2. **房间管理接口 🏠**
+    - **创建房间接口**
+        - **URL:** `/api/room/create`
+        - **方法:** POST
+        - **参数:**
+            - `roomName`: 房间名 (String)
+            - `chipAmount`: 每手码量 (Number)
+        - **返回:**
+            - `retCode`: 请求结果代码，如 `SUCCESS`
+            - `roomInfo`: 房间的基本信息
+                - `roomId`: 房间id
+                - `roomCode`: 房间code
+                - `roomName`: 房间名称
+                - `chipAmount`: 每手码量
+                - `createdTime`: 创建时间(yyyyMMddHHmmss)
+            - `userDetail` ：用户的数据
+                - `userNickname`: 用户昵称 (String)
+                - `buyIn`: 带入码量
+                - `settlementStatus`: 结算状态 (String)
+                - `finalAmount`: 最后码量 (Number)
+                - `profitLoss`: 盈亏情况 (Number)
+    - **加入房间接口**
+        - **URL:** `/api/room/join`
+        - **方法:** POST
+        - **参数:**
+            - `roomId`: 房间Id (String)
+            - `roomCode`: 房间code (String)
+        - **返回:**
+            - `retCode`: 请求结果代码，如 `SUCCESS`
+            - `roomInfo`: 房间的基本信息
+                - `roomId`: 房间id
+                - `roomCode`: 房间code
+                - `roomName`: 房间名称
+                - `chipAmount`: 每手码量
+                - `createdTime`: 创建时间(yyyyMMddHHmmss)
+            - `userDetail` ：用户的数据
+                - `userNickname`: 用户昵称 (String)
+                - `buyIn`: 带入码量
+                - `settlementStatus`: 结算状态 (String)
+                - `finalAmount`: 最后码量 (Number)
+                - `profitLoss`: 盈亏情况 (Number)
+            - `allPlayerDetails`: 房间内所有玩家的数据
+                - `userDetail` ：用户的数据
+                    - `userNickname`: 用户昵称 (String)
+                    - `buyIn`: 带入码量
+                    - `settlementStatus`: 结算状态 (String)
+                    - `finalAmount`: 最后码量 (Number)
+                    - `profitLoss`: 盈亏情况 (Number)
+        - `transactionRecords`: 房间内所有人的流水记录，包含以下信息：
+            - `timestamp`: 流水时间 (yyyyMMddHHmmss)
+            - `userNickname`: 用户昵称 (String)
+            - `actionType`: 动作类型，如“带入”、“结算”、取消结算 (String)
+            - `actionAmount`: 行为涉及金额，如结算金额 (Number)
+    - **获取最近房间列表接口**
+        - **URL:** `/poker/room/recent`
+        - **方法:** GET
+        - **参数:**
+            - 无
+        - **返回:**
+            - `retCode`: 请求结果代码，如 `SUCCESS`
+            - `rooms`: 房间信息列表集合
+                - `roomId`: 房间id
+                - `roomCode`: 房间code
+                - `roomName`: 房间名称
+                - `chipAmount`: 每手码量
+                - `createdTime`: 创建时间(yyyyMMddHHmmss)
+3. **游戏操作接口 🎲**
+    - **带入操作接口**
+        - **URL:** `/api/room/buyIn`
+        - **方法:** POST
+        - **参数:**
+            - `roomId`: 房间号 (String)
+        - **返回:**
+            - `retCode`: 请求结果代码，如 `SUCCESS`
+    - **结算操作接口**
+        - **URL:** `/api/room/settle`
+        - **方法:** POST
+        - **参数:**
+            - `roomId`: 房间号 (String)
+            - `finalAmount`: 最终码量 (Number)
+        - **返回:**
+            - `retCode`: 请求结果代码，如 `SUCCESS`
+    - **取消结算接口**
+        - **URL:** `/api/room/cancelSettle`
+        - **方法:** POST
+        - **参数:**
+            - `roomId`: 房间号 (String)
+        - **返回:**
+            - `retCode`: 请求结果代码，如 `SUCCESS`

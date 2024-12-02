@@ -1,0 +1,30 @@
+<view class="container">
+  <!-- 标题区域 -->
+  <view class="header">
+    <text class="title-line">记录带入</text>
+    <text class="title-line">精准结算</text>
+  </view>
+
+  <!-- 最近房间列表 -->
+  <view class="recent-rooms">
+    <view class="section-title">最近加入</view>
+    <view class="room-list">
+      <view class="room-item" wx:for="{{recentRooms}}" wx:key="roomId">
+        <view class="room-main">
+          <view class="room-name">{{item.roomName}}</view>
+          <view class="room-code">房间号：{{item.roomCode}}</view>
+        </view>
+        <view class="room-info">
+          <text class="chip-amount">底注：{{item.chipAmount}}元</text>
+          <text class="create-time">{{item.createdTime}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部按钮区域 -->
+  <view class="bottom-buttons">
+    <button class="btn create-btn">创建房间</button>
+    <button class="btn join-btn">加入房间</button>
+  </view>
+</view>
