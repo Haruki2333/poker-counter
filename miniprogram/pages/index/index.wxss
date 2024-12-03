@@ -12,15 +12,20 @@
 
 .title-line {
   display: block;
-  font-size: 48rpx;
+  font-size: 68rpx;
   font-weight: bold;
   line-height: 1.5;
   color: #333;
 }
 
 .recent-rooms {
-  flex: 1;
-  margin: 40rpx 0;
+  margin: 20rpx 0;
+  border-radius: 12rpx;
+  overflow: hidden;
+  width: 100%;
+  height: 660rpx;
+  display: flex;
+  flex-direction: column;
 }
 
 .section-title {
@@ -30,70 +35,93 @@
 }
 
 .room-list {
-  background: #fff;
-  border-radius: 12rpx;
+  flex: 1;
+  position: relative;
+}
+
+.room-header {
+  flex: none;
+  display: flex;
+  background: #f8f8f8;
+  padding: 15rpx 0;
+  font-weight: 500;
+  font-size: 26rpx;
+  color: #666;
+  border-bottom: 2rpx solid #eee;
+}
+
+.room-items {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
 }
 
 .room-item {
-  padding: 30rpx;
-  border-bottom: 1rpx solid #eee;
   display: flex;
-  flex-direction: column;
-  gap: 12rpx;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #eee;
+  font-size: 26rpx;
+  color: #333;
 }
 
 .room-item:last-child {
   border-bottom: none;
 }
 
-.room-main {
+.col {
+  padding: 0 10rpx;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.room-name {
-  font-size: 32rpx;
-  color: #333;
-  font-weight: 500;
+.room-code-col {
+  flex: 0 0 140rpx;
+  padding-left: 20rpx;
 }
 
-.room-code {
-  font-size: 28rpx;
-  color: #666;
+.room-code-link {
+  text-decoration: underline;
 }
 
-.room-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 24rpx;
-  color: #999;
+.room-name-col {
+  flex: 0 0 160rpx;
 }
 
-.chip-amount {
-  color: #07c160;
-  font-weight: 500;
+.chip-amount-col {
+  flex: 0 0 120rpx;
 }
 
-.player-count {
-  margin-right: 20rpx;
+.create-time-col {
+  flex: 1;
+  padding-right: 20rpx;
 }
 
 .bottom-buttons {
-  margin-top: auto;
-  padding: 40rpx 0;
+  position: fixed;
+  bottom: 16vh;
+  left: 40rpx;
+  right: 40rpx;
   display: flex;
   justify-content: space-between;
+  padding: 40rpx 0;
 }
 
 .btn {
   margin: 0;
-  height: 88rpx;
-  line-height: 88rpx;
+  height: 96rpx;
+  line-height: 96rpx;
   font-size: 32rpx;
-  border-radius: 44rpx;
-  width: 48% !important;
+  border-radius: 12rpx;
+  width: 45% !important;
+  padding: 0 30rpx;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .create-btn {
@@ -105,4 +133,109 @@
   background: #fff;
   color: #07c160;
   border: 2rpx solid #07c160;
+}
+
+.create-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.modal-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 600rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.modal-header {
+  padding: 30rpx;
+  text-align: center;
+  position: relative;
+  border-bottom: 1rpx solid #eee;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.modal-close {
+  position: absolute;
+  right: 30rpx;
+  top: 30rpx;
+  font-size: 40rpx;
+  color: #999;
+  line-height: 1;
+}
+
+.modal-body {
+  padding: 30rpx;
+}
+
+.input-group {
+  margin-bottom: 30rpx;
+}
+
+.input-group:last-child {
+  margin-bottom: 0;
+}
+
+.input-label {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.input-control {
+  width: 100%;
+  height: 80rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.modal-footer {
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1rpx solid #eee;
+}
+
+.modal-btn {
+  width: 240rpx !important;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin: 0;
+  font-size: 28rpx;
+  border-radius: 40rpx;
+}
+
+.cancel-btn {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.confirm-btn {
+  background: #07c160;
+  color: #fff;
 }

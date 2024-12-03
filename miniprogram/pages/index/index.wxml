@@ -7,24 +7,95 @@
 
   <!-- 最近房间列表 -->
   <view class="recent-rooms">
-    <view class="section-title">最近加入</view>
-    <view class="room-list">
-      <view class="room-item" wx:for="{{recentRooms}}" wx:key="roomId">
-        <view class="room-main">
-          <view class="room-name">{{item.roomName}}</view>
-          <view class="room-code">房间号：{{item.roomCode}}</view>
-        </view>
-        <view class="room-info">
-          <text class="chip-amount">底注：{{item.chipAmount}}元</text>
-          <text class="create-time">{{item.createdTime}}</text>
+    <!-- 表头固定在外部 -->
+    <view class="room-header">
+      <view class="col room-code-col">房间号</view>
+      <view class="col room-name-col">房间名称</view>
+      <view class="col chip-amount-col">每手码量</view>
+      <view class="col create-time-col">加入时间</view>
+    </view>
+    <!-- 使用scroll-view包裹列表内容 -->
+    <scroll-view 
+      scroll-y="true" 
+      class="room-list"
+      enhanced="true"
+      show-scrollbar="true">
+      <view class="room-items">
+        <view class="room-item" wx:for="{{recentRooms}}" wx:key="roomId">
+          <view class="col room-code-col">
+            <text class="room-code-link" bindtap="onTapRoomCode" data-room-code="{{item.roomCode}}">{{item.roomCode}}</text>
+          </view>
+          <view class="col room-name-col">{{item.roomName}}</view>
+          <view class="col chip-amount-col">{{item.chipAmount}}</view>
+          <view class="col create-time-col">{{item.createdTime}}</view>
         </view>
       </view>
-    </view>
+    </scroll-view>
   </view>
 
   <!-- 底部按钮区域 -->
   <view class="bottom-buttons">
-    <button class="btn create-btn">创建房间</button>
-    <button class="btn join-btn">加入房间</button>
+    <button class="btn create-btn" bindtap="onCreateRoom">创建房间</button>
+    <button class="btn join-btn" bindtap="onJoinRoom">加入房间</button>
+  </view>
+
+  <!-- 在底部按钮区域前添加 -->
+  <view class="create-modal" wx:if="{{showCreateModal}}">
+    <view class="modal-mask" bindtap="onCloseModal"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">创建房间</text>
+        <text class="modal-close" bindtap="onCloseModal">×</text>
+      </view>
+      <view class="modal-body">
+        <view class="input-group">
+          <text class="input-label">房间名称</text>
+          <input class="input-control" 
+            type="text"
+            placeholder="请输入房间名称" 
+            value="{{roomName}}"
+            bindinput="onRoomNameInput"
+          />
+        </view>
+        <view class="input-group">
+          <text class="input-label">每手码量</text>
+          <input class="input-control" 
+            type="number"
+            placeholder="请输入每手码量" 
+            value="{{chipAmount}}"
+            bindinput="onChipAmountInput"
+          />
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn cancel-btn" bindtap="onCloseModal">取消</button>
+        <button class="modal-btn confirm-btn" bindtap="onConfirmCreate">确定</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 添加加入房间弹窗 -->
+  <view class="create-modal" wx:if="{{showJoinModal}}">
+    <view class="modal-mask" bindtap="onCloseModal"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">加入房间</text>
+        <text class="modal-close" bindtap="onCloseModal">×</text>
+      </view>
+      <view class="modal-body">
+        <view class="input-group">
+          <text class="input-label">房间号</text>
+          <input class="input-control" 
+                 type="text"
+                 placeholder="请输入房间号"
+                 value="{{roomCode}}"
+                 bindinput="onRoomCodeInput"/>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn cancel-btn" bindtap="onCloseModal">取消</button>
+        <button class="modal-btn confirm-btn" bindtap="onConfirmJoin">确定</button>
+      </view>
+    </view>
   </view>
 </view>

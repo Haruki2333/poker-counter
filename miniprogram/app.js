@@ -20,22 +20,30 @@ App({
         resourceAppid: 'wxf0685107124f2bda', // 微信云托管环境所属账号，服务商appid、公众号或小程序appid
         resourceEnv: 'prod-4ggog6ad90496e45', // 微信云托管的环境ID
       })
-      await that.cloud.init() // init过程是异步的，需要等待init完成才可以发起调用
+      await cloud.init() // init过程是异步的，需要等待init完成才可以发起调用
       that.cloud = cloud
     }
     try {
-      const result = await that.cloud.callContainer({
-        path: obj.path, // 填入业务自定义路径和参数，根目录，就是 / 
-        method: obj.method || 'GET', // 按照自己的业务开发，选择对应的方法
-        // dataType:'text', // 如果返回的不是json格式，需要添加此项
-        header: {
-          'X-WX-SERVICE': 'springboot-wji0', // xxx中填入服务名称（微信云托管 - 服务管理 - 服务列表 - 服务名称）
-          // 其他header参数
-        }
-        // 其余参数同 wx.request
+      console.log('请求参数:', {
+        path: obj.path,
+        method: obj.method || 'GET',
+        data: obj.data
       })
-      console.log(`微信云托管调用结果${result.errMsg} | callid:${result.callID}`)
-      return result.data // 业务数据在data中
+      const result = await that.cloud.callContainer({
+        path: obj.path,
+        method: obj.method || 'GET',
+        data: this.objectToQueryString(obj.data),
+        header: {
+          'X-WX-SERVICE': 'springboot-wji0',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      console.log('响应结果:', {
+        errMsg: result.errMsg,
+        callID: result.callID,
+        data: result.data
+      })
+      return result.data
     } catch (e) {
       const error = e.toString()
       // 如果错误信息为未初始化，则等待300ms再次尝试，因为init过程是异步的
@@ -49,5 +57,24 @@ App({
         throw new Error(`微信云托管调用失败${error}`)
       }
     }
+  },
+  objectToQueryString(data) {
+    if (!data) {
+      return '';
+    }
+    return Object.keys(data)
+      .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+      .join('&');
+  },
+  // 添加时间格式化工具函数
+  formatTime(timeStr) {
+    if (!timeStr || timeStr.length !== 14) return '';
+    
+    const month = timeStr.substring(4, 6);
+    const day = timeStr.substring(6, 8);
+    const hour = timeStr.substring(8, 10);
+    const minute = timeStr.substring(10, 12);
+    
+    return `${parseInt(month)}月${parseInt(day)}日 ${hour}:${minute}`;
   }
 });

@@ -21,7 +21,6 @@
                 - `roomCode`: 房间code
                 - `roomName`: 房间名称
                 - `chipAmount`: 每手码量
-                - `createdTime`: 创建时间(yyyyMMddHHmmss)
             - `userDetail` ：用户的数据
                 - `userNickname`: 用户昵称 (String)
                 - `buyIn`: 带入码量
@@ -41,7 +40,6 @@
                 - `roomCode`: 房间code
                 - `roomName`: 房间名称
                 - `chipAmount`: 每手码量
-                - `createdTime`: 创建时间(yyyyMMddHHmmss)
             - `userDetail` ：用户的数据
                 - `userNickname`: 用户昵称 (String)
                 - `buyIn`: 带入码量
@@ -61,7 +59,7 @@
             - `actionType`: 动作类型，如“带入”、“结算”、取消结算 (String)
             - `actionAmount`: 行为涉及金额，如结算金额 (Number)
     - **获取最近房间列表接口**
-        - **URL:** `/poker/room/recent`
+        - **URL:** `/api/room/recent`
         - **方法:** GET
         - **参数:**
             - 无
