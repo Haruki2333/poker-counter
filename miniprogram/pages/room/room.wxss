@@ -129,12 +129,18 @@
   background-color: #f8f8f8;
   padding: 20rpx;
   border-radius: 10rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-info-column {
+  flex: 1;
 }
 
 .user-info-item {
   display: flex;
   justify-content: space-between;
-  padding: 10rpx 0;
+  padding: 10rpx 20rpx;
 }
 
 .label {
@@ -143,14 +149,6 @@
 
 .value {
   font-weight: bold;
-}
-
-.profit {
-  color: #07c160;
-}
-
-.loss {
-  color: #ee0a24;
 }
 
 .btn-disabled {
@@ -167,7 +165,7 @@
 
 /* 最近记录的高亮样式 */
 .recent-record {
-  background-color: rgba(7, 193, 96, 0.1);  /* 使用主题色的淡化版本 */
+  background-color: rgba(7, 193, 96, 0.1);  /* 使用主题色淡化版本 */
   animation: fadeHighlight 2s infinite alternate;  /* 添加呼吸效果 */
 }
 
@@ -179,4 +177,98 @@
   to {
     background-color: rgba(7, 193, 96, 0.2);
   }
+}
+
+/* Tab相关样式 */
+.content-area {
+  margin: 20rpx 0;
+  height: 720rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-header {
+  display: flex;
+  border-bottom: 2rpx solid #eee;
+  margin-bottom: 20rpx;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  color: #666;
+  position: relative;
+}
+
+.tab-item.active {
+  color: #07c160;
+  font-weight: 500;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2rpx;
+  left: 25%;
+  width: 50%;
+  height: 4rpx;
+  background-color: #07c160;
+  border-radius: 2rpx;
+}
+
+.tab-content {
+  flex: 1;
+  overflow: hidden;
+}
+
+.tab-content.hidden {
+  display: none;
+}
+
+/* 玩家列表样式 */
+.players-list {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.players-header {
+  display: flex;
+  background: #f8f8f8;
+  padding: 15rpx 0;
+  font-size: 26rpx;
+  color: #666;
+  font-weight: 500;
+}
+
+.players-scroll {
+  flex: 1;
+}
+
+.player-item {
+  display: flex;
+  padding: 20rpx 0;
+  font-size: 26rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.player-col {
+  flex: 1;
+  text-align: center;
+  padding: 0 10rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.player-col.nickname {
+  flex: 1.2;
+  text-align: left;
+  padding-left: 20rpx;
+}
+
+.player-col.status {
+  flex: 0.8;
 }

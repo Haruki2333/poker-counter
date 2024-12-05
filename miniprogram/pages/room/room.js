@@ -10,7 +10,8 @@ Page({
     roomInfo: {},
     userDetail: {},
     transactionRecords: [],
-    allPlayerDetails: []
+    allPlayerDetails: [],
+    activeTab: 'transactions'
   },
 
   /**
@@ -295,5 +296,13 @@ Page({
         icon: 'none'
       });
     }
+  },
+
+  // 新增：切换标签方法
+  switchTab(e) {
+    const tab = e.currentTarget.dataset.tab;
+    this.setData({
+      activeTab: tab
+    });
   },
 })

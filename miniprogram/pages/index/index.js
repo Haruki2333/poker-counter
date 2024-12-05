@@ -4,7 +4,6 @@ Page({
   data: {
     recentRooms: [],
     showCreateModal: false,
-    showJoinModal: false,
     roomName: '',
     chipAmount: '',
     roomCode: ''
@@ -147,31 +146,24 @@ Page({
 
   // 显示加入房间弹窗
   onJoinRoom() {
-    this.setData({
-      showJoinModal: true
-    })
-  },
-
-  // 监听房间号输入
-  onRoomCodeInput(e) {
-    this.setData({
-      roomCode: e.detail.value
-    })
-  },
-
-  // 确认加入房间
-  async onConfirmJoin() {
-    const { roomCode } = this.data
-
-    if (!roomCode.trim()) {
-      wx.showToast({
-        title: '请输入房间号',
-        icon: 'none'
-      })
-      return
-    }
-
-    await this.joinRoom(roomCode.trim(), true)
+    wx.showModal({
+      title: '加入房间',
+      editable: true,
+      placeholderText: '请输入房间号',
+      success: async (res) => {
+        if (res.confirm) {
+          const roomCode = res.content.trim();
+          if (!roomCode) {
+            wx.showToast({
+              title: '请输入房间号',
+              icon: 'none'
+            });
+            return;
+          }
+          await this.joinRoom(roomCode);
+        }
+      }
+    });
   },
 
   // 点击房间号处理函数
