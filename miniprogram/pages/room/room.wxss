@@ -1,0 +1,182 @@
+/* pages/room/index.wxss */
+.room-container {
+  padding: 20rpx;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.room-header {
+  text-align: center;
+  padding: 20rpx 0;
+}
+
+.room-name {
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.room-info {
+  display: flex;
+  justify-content: center;
+  gap: 30rpx;
+  color: #666;
+  font-size: 28rpx;
+}
+
+.transaction-list {
+  margin: 20rpx 0;
+  border-radius: 12rpx;
+  overflow: hidden;
+  width: 100%;
+  height: 720rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-title {
+  font-size: 32rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+}
+
+.transaction-header {
+  flex: none;
+  display: flex;
+  background: #f8f8f8;
+  padding: 15rpx 0;
+  font-weight: 500;
+  font-size: 26rpx;
+  color: #666;
+  border-bottom: 2rpx solid #eee;
+}
+
+.transaction-scroll {
+  flex: 1;
+  position: relative;
+}
+
+.transaction-items {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.transaction-item {
+  display: flex;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #eee;
+  font-size: 26rpx;
+  color: #333;
+  transition: background-color 0.3s ease;
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
+}
+
+.col {
+  padding: 0 10rpx;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.time-col {
+  flex: 0 0 200rpx;
+  padding-left: 20rpx;
+}
+
+.user-col {
+  flex: 0 0 160rpx;
+}
+
+.type-col {
+  flex: 0 0 120rpx;
+}
+
+.amount-col {
+  flex: 1;
+  padding-right: 20rpx;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-around;
+  padding: 20rpx 0;
+}
+
+.btn-buy-in, .btn-settle {
+  width: 40%;
+  margin: 0;
+}
+
+.btn-buy-in {
+  background-color: #07c160;
+  color: white;
+}
+
+.btn-settle {
+  background-color: #1989fa;
+  color: white;
+}
+
+.user-info {
+  background-color: #f8f8f8;
+  padding: 20rpx;
+  border-radius: 10rpx;
+}
+
+.user-info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10rpx 0;
+}
+
+.label {
+  color: #666;
+}
+
+.value {
+  font-weight: bold;
+}
+
+.profit {
+  color: #07c160;
+}
+
+.loss {
+  color: #ee0a24;
+}
+
+.btn-disabled {
+  background-color: #ccc !important;
+  color: #999 !important;
+}
+
+.btn-cancel-settle {
+  width: 40%;
+  margin: 0;
+  background-color: #ff4d4f;
+  color: white;
+}
+
+/* 最近记录的高亮样式 */
+.recent-record {
+  background-color: rgba(7, 193, 96, 0.1);  /* 使用主题色的淡化版本 */
+  animation: fadeHighlight 2s infinite alternate;  /* 添加呼吸效果 */
+}
+
+/* 添加呼吸动画效果 */
+@keyframes fadeHighlight {
+  from {
+    background-color: rgba(7, 193, 96, 0.1);
+  }
+  to {
+    background-color: rgba(7, 193, 96, 0.2);
+  }
+}

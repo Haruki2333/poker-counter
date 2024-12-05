@@ -14,6 +14,10 @@ Page({
     this.getRecentRooms()
   },
 
+  onShow() {
+    this.getRecentRooms()
+  },
+
   // 获取最近房间列表
   async getRecentRooms() {
     try {
@@ -120,8 +124,10 @@ Page({
 
       if (result.retCode === 'SUCCESS') {
         this.onCloseModal()
+        // 将接口返回的数据编码后通过 URL 参数传递
+        const roomData = encodeURIComponent(JSON.stringify(result.data))
         wx.navigateTo({
-          url: `/pages/room/index?roomId=${result.data.roomInfo.roomId}`
+          url: `/pages/room/room?roomData=${roomData}`
         })
       } else {
         wx.showToast({
@@ -194,8 +200,10 @@ Page({
         if (needClose) {
           this.onCloseModal()
         }
+        // 将接口返回的数据编码后通过 URL 参数传递
+        const roomData = encodeURIComponent(JSON.stringify(result.data))
         wx.navigateTo({
-          url: `/pages/room/index?roomId=${result.data.roomInfo.roomId}`
+          url: `/pages/room/room?roomData=${roomData}`
         })
       } else {
         wx.showToast({

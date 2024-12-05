@@ -1,0 +1,74 @@
+<!--pages/room/index.wxml-->
+<view class="room-container">
+  <!-- 顶部房间信息 -->
+  <view class="room-header">
+    <view class="room-name">{{roomInfo.roomName}}</view>
+    <view class="room-info">
+      <text>房间号：{{roomInfo.roomCode}}</text>
+      <text>每手码量：{{roomInfo.chipAmount}}</text>
+    </view>
+  </view>
+
+  <!-- 中部流水记录 -->
+  <view class="transaction-list">
+    <view class="transaction-title">流水记录</view>
+    <!-- 表头固定在外部 -->
+    <view class="transaction-header">
+      <view class="col time-col">时间</view>
+      <view class="col user-col">玩家</view>
+      <view class="col type-col">类型</view>
+      <view class="col amount-col">金额</view>
+    </view>
+    <!-- 使用scroll-view包裹列表内容 -->
+    <scroll-view 
+      scroll-y="true" 
+      class="transaction-scroll" 
+      enhanced="true" 
+      show-scrollbar="true">
+      <view class="transaction-items">
+        <view class="transaction-item {{item.isRecent ? 'recent-record' : ''}}" 
+              wx:for="{{transactionRecords}}" 
+              wx:key="timestamp">
+          <view class="col time-col">{{item.formattedTime}}</view>
+          <view class="col user-col">{{item.userNickname}}</view>
+          <view class="col type-col">{{item.actionType}}</view>
+          <view class="col amount-col">{{item.actionAmount}}</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons">
+    <button class="btn-buy-in {{userDetail.settlementStatus === 'S' ? 'btn-disabled' : ''}}" 
+            bindtap="handleBuyIn"
+            disabled="{{userDetail.settlementStatus === 'S'}}">带入</button>
+    
+    <button class="{{userDetail.settlementStatus === 'S' ? 'btn-cancel-settle' : 'btn-settle'}}" 
+            bindtap="{{userDetail.settlementStatus === 'S' ? 'handleCancelSettle' : 'handleSettle'}}">
+      {{userDetail.settlementStatus === 'S' ? '取消结算' : '结算'}}
+    </button>
+  </view>
+
+  <!-- 底部个人信息 -->
+  <view class="user-info">
+    <view class="user-info-item">
+      <text class="label">昵称</text>
+      <text class="value">{{userDetail.userNickname}}</text>
+    </view>
+    <view class="user-info-item">
+      <text class="label">带入码量</text>
+      <text class="value">{{userDetail.buyIn}}</text>
+    </view>
+    <view class="user-info-item">
+      <text class="label">当前码量</text>
+      <text class="value">{{userDetail.finalAmount}}</text>
+    </view>
+    <view class="user-info-item">
+      <text class="label">盈亏情况</text>
+      <text class="value {{userDetail.profitLoss >= 0 ? 'profit' : 'loss'}}">
+        {{userDetail.profitLoss}}
+      </text>
+    </view>
+  </view>
+</view>

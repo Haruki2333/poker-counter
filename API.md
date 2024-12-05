@@ -77,6 +77,7 @@
         - **方法:** POST
         - **参数:**
             - `roomId`: 房间号 (String)
+            - `hands`: 带入手数 (Number)
         - **返回:**
             - `retCode`: 请求结果代码，如 `SUCCESS`
     - **结算操作接口**

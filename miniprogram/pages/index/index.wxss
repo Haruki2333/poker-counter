@@ -224,10 +224,14 @@
 .modal-btn {
   width: 240rpx !important;
   height: 80rpx;
-  line-height: 80rpx;
+  line-height: 80rpx !important;
   margin: 0;
   font-size: 28rpx;
   border-radius: 40rpx;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
 }
 
 .cancel-btn {
