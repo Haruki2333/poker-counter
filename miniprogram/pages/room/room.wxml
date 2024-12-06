@@ -102,14 +102,14 @@
         <text class="value nickname-text" bindtap="handleUpdateNickname">{{userDetail.userNickname}}</text>
       </view>
       <view class="user-info-item">
-        <text class="label">带入码量</text>
-        <text class="value">{{userDetail.buyIn}}</text>
+        <text class="label">当前码量</text>
+        <text class="value">{{userDetail.finalAmount}}</text>
       </view>
     </view>
     <view class="user-info-column">
       <view class="user-info-item">
-        <text class="label">当前码量</text>
-        <text class="value">{{userDetail.finalAmount}}</text>
+        <text class="label">带入码量</text>
+        <text class="value">{{userDetail.buyIn}}</text>
       </view>
       <view class="user-info-item">
         <text class="label">盈亏情况</text>
