@@ -165,8 +165,8 @@
 
 /* 最近记录的高亮样式 */
 .recent-record {
-  background-color: rgba(7, 193, 96, 0.1);  /* 使用主题色淡化版本 */
-  animation: fadeHighlight 2s infinite alternate;  /* 添加呼吸效果 */
+  background-color: rgba(7, 193, 96, 0.1);
+  animation: fadeHighlight 2s infinite alternate;
 }
 
 /* 添加呼吸动画效果 */
@@ -274,4 +274,9 @@
 
 .player-col.status {
   flex: 0.8;
+}
+
+.nickname-text {
+  text-decoration: underline;
+  cursor: pointer;
 }
