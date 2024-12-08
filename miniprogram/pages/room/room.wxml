@@ -2,7 +2,11 @@
 <view class="room-container">
   <!-- 顶部房间信息 -->
   <view class="room-header">
-    <view class="room-name">{{roomInfo.roomName}}</view>
+    <view class="room-name">
+      <image class="room-icon" src="/assets/icons/diamond.svg" mode="aspectFit"></image>
+      <text>{{roomInfo.roomName}}</text>
+      <image class="room-icon" src="/assets/icons/diamond.svg" mode="aspectFit"></image>
+    </view>
     <view class="room-info">
       <text>房间号：{{roomInfo.roomCode}}</text>
       <text>每手筹码：{{roomInfo.chipAmount}}</text>

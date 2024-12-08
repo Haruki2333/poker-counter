@@ -203,6 +203,7 @@ Page({
       title: '结算',
       editable: true,
       placeholderText: '请输入最终筹码',
+      type: 'digit',
       success: async (res) => {
         if (res.confirm) {
           const finalAmount = Number(res.content);
