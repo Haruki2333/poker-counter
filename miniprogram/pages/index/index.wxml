@@ -17,7 +17,7 @@
     <view class="room-header">
       <view class="col room-code-col">房间号</view>
       <view class="col room-name-col">房间名称</view>
-      <view class="col chip-amount-col">每手码量</view>
+      <view class="col chip-amount-col">每手筹码</view>
       <view class="col create-time-col">加入时间</view>
     </view>
     <!-- 使用scroll-view包裹列表内容 -->
@@ -64,10 +64,10 @@
           />
         </view>
         <view class="input-group">
-          <text class="input-label">每手码量</text>
+          <text class="input-label">每手筹码</text>
           <input class="input-control" 
             type="number"
-            placeholder="请输入每手码量" 
+            placeholder="请输入每手筹码" 
             value="{{chipAmount}}"
             bindinput="onChipAmountInput"
           />

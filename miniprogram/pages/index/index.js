@@ -98,7 +98,7 @@ Page({
 
     if (!chipAmount || isNaN(chipAmount)) {
       wx.showToast({
-        title: '请输入正确的码量',
+        title: '请输入正确的筹码',
         icon: 'none'
       })
       return

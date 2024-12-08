@@ -202,7 +202,7 @@ Page({
     wx.showModal({
       title: '结算',
       editable: true,
-      placeholderText: '请输入最终码量',
+      placeholderText: '请输入最终筹码',
       success: async (res) => {
         if (res.confirm) {
           const finalAmount = Number(res.content);
