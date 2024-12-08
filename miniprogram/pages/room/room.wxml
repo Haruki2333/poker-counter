@@ -5,7 +5,7 @@
     <view class="room-name">{{roomInfo.roomName}}</view>
     <view class="room-info">
       <text>房间号：{{roomInfo.roomCode}}</text>
-      <text>每手码量：{{roomInfo.chipAmount}}</text>
+      <text>每手筹码：{{roomInfo.chipAmount}}</text>
     </view>
   </view>
 
@@ -102,7 +102,7 @@
         <text class="value nickname-text" bindtap="handleUpdateNickname">{{userDetail.userNickname}}</text>
       </view>
       <view class="user-info-item">
-        <text class="label">当前码量</text>
+        <text class="label">当前筹码</text>
         <block wx:if="{{userDetail.settlementStatus !== 'S'}}">
           <input class="value input-amount" 
                  type="digit" 
@@ -117,12 +117,17 @@
     </view>
     <view class="user-info-column">
       <view class="user-info-item">
-        <text class="label">带入码量</text>
+        <text class="label">带入筹码</text>
         <text class="value">{{userDetail.buyIn}}</text>
       </view>
       <view class="user-info-item">
         <text class="label">盈亏情况</text>
-        <text class="value">{{userDetail.profitLoss}}</text>
+        <block wx:if="{{userDetail.settlementStatus === 'S'}}">
+          <text class="value">{{userDetail.profitLoss}}</text>
+        </block>
+        <block wx:else>
+          <text class="value">{{userDetail.finalAmount ? userDetail.profitLoss : '/'}}</text>
+        </block>
       </view>
     </view>
   </view>
