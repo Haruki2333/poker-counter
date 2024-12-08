@@ -355,4 +355,16 @@ Page({
       }
     });
   },
+
+  // 在 Page 对象中添加以下方法
+  handleFinalAmountInput(e) {
+    const finalAmount = Number(e.detail.value) || 0;
+    const buyIn = Number(this.data.userDetail.buyIn) || 0;
+    const profitLoss = finalAmount - buyIn;
+
+    this.setData({
+      'userDetail.finalAmount': finalAmount,
+      'userDetail.profitLoss': profitLoss
+    });
+  },
 })

@@ -149,6 +149,8 @@
 
 .value {
   font-weight: 500;
+  min-width: 160rpx;
+  text-align: right;
 }
 
 .btn-disabled {
@@ -279,4 +281,12 @@
 .nickname-text {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.input-amount {
+  text-align: right;
+  width: 160rpx;
+  padding: 0;
+  margin: 0;
+  font-size: 28rpx;
 }

@@ -32,7 +32,7 @@
           <view class="col time-col">时间</view>
           <view class="col user-col">玩家</view>
           <view class="col type-col">类型</view>
-          <view class="col amount-col">金额</view>
+          <view class="col amount-col">筹码</view>
         </view>
         <scroll-view scroll-y="true" 
                      class="transaction-scroll" 
@@ -103,7 +103,16 @@
       </view>
       <view class="user-info-item">
         <text class="label">当前码量</text>
-        <text class="value">{{userDetail.finalAmount}}</text>
+        <block wx:if="{{userDetail.settlementStatus !== 'S'}}">
+          <input class="value input-amount" 
+                 type="digit" 
+                 value="{{userDetail.finalAmount || ''}}"
+                 bindinput="handleFinalAmountInput"
+                 placeholder="请输入"/>
+        </block>
+        <block wx:else>
+          <text class="value">{{userDetail.finalAmount}}</text>
+        </block>
       </view>
     </view>
     <view class="user-info-column">
