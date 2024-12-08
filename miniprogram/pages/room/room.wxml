@@ -45,7 +45,7 @@
               <view class="col time-col">{{item.formattedTime}}</view>
               <view class="col user-col">{{item.userNickname}}</view>
               <view class="col type-col">{{item.actionType}}</view>
-              <view class="col amount-col">{{item.actionAmount}}</view>
+              <view class="col amount-col">{{item.actionType === '取消结算' ? '/' : item.actionAmount}}</view>
             </view>
           </view>
         </scroll-view>
@@ -58,7 +58,7 @@
         <view class="players-header">
           <view class="player-col nickname">玩家</view>
           <view class="player-col">带入</view>
-          <view class="player-col">现有</view>
+          <view class="player-col">当前</view>
           <view class="player-col">盈亏</view>
           <view class="player-col status">状态</view>
         </view>
@@ -72,8 +72,8 @@
                   wx:key="userId">
               <view class="player-col nickname">{{item.userNickname}}</view>
               <view class="player-col">{{item.buyIn}}</view>
-              <view class="player-col">{{item.finalAmount}}</view>
-              <view class="player-col">{{item.profitLoss}}</view>
+              <view class="player-col">{{item.settlementStatus === 'S' ? item.finalAmount : '/'}}</view>
+              <view class="player-col">{{item.settlementStatus === 'S' ? (item.profitLoss > 0 ? '+' + item.profitLoss : item.profitLoss) : '/'}}</view>
               <view class="player-col status">{{item.settlementStatus === 'S' ? '已结算' : '进行中'}}</view>
             </view>
           </view>
@@ -123,10 +123,10 @@
       <view class="user-info-item">
         <text class="label">盈亏情况</text>
         <block wx:if="{{userDetail.settlementStatus === 'S'}}">
-          <text class="value">{{userDetail.profitLoss}}</text>
+          <text class="value">{{userDetail.profitLoss > 0 ? '+' + userDetail.profitLoss : userDetail.profitLoss}}</text>
         </block>
         <block wx:else>
-          <text class="value">{{userDetail.finalAmount ? userDetail.profitLoss : '/'}}</text>
+          <text class="value">{{userDetail.finalAmount ? (userDetail.profitLoss > 0 ? '+' + userDetail.profitLoss : userDetail.profitLoss) : '/'}}</text>
         </block>
       </view>
     </view>
