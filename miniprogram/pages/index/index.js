@@ -6,7 +6,8 @@ Page({
     showCreateModal: false,
     roomName: '',
     chipAmount: '',
-    roomCode: ''
+    roomCode: '',
+    isFirstShow: true  // 添加标记位
   },
 
   onLoad() {
@@ -14,7 +15,13 @@ Page({
   },
 
   onShow() {
-    this.getRecentRooms()
+    // 只有非首次显示时才刷新房间信息
+    if (!this.data.isFirstShow) {
+      this.getRecentRooms()
+    }
+    this.setData({
+      isFirstShow: false
+    })
   },
 
   // 获取最近房间列表
