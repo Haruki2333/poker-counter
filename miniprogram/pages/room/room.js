@@ -103,7 +103,7 @@ Page({
    */
   onShareAppMessage() {
     const roomCode = this.data.roomInfo.roomCode;
-    const roomName = this.data.roomInfo.roomName || '德州扑克房间';
+    const roomName = this.data.roomInfo.roomName || '好友房间';
     return {
       title: `邀请你加入【${roomName}】`,
       path: `/pages/index/index?roomCode=${roomCode}`,

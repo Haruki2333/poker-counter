@@ -10,14 +10,14 @@ Page({
     isFirstShow: true  // 添加标记位
   },
 
-  onLoad() {
+  onLoad(options) {
     // 处理分享进入的情况
     if (options.roomCode) {
       // 通过分享链接进入，直接加入房间
       this.joinRoom(options.roomCode);
       return;
     }
-    
+
     this.getRecentRooms()
   },
 
