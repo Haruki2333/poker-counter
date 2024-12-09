@@ -102,7 +102,18 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {
-
+    const roomCode = this.data.roomInfo.roomCode;
+    const roomName = this.data.roomInfo.roomName || '德州扑克房间';
+    return {
+      title: `邀请你加入【${roomName}】`,
+      path: `/pages/index/index?roomCode=${roomCode}`,
+      success: function(res) {
+        wx.showToast({
+          title: '分享成功',
+          icon: 'success'
+        });
+      }
+    }
   },
 
   // 加入房间刷新数据

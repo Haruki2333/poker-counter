@@ -11,6 +11,13 @@ Page({
   },
 
   onLoad() {
+    // 处理分享进入的情况
+    if (options.roomCode) {
+      // 通过分享链接进入，直接加入房间
+      this.joinRoom(options.roomCode);
+      return;
+    }
+    
     this.getRecentRooms()
   },
 
