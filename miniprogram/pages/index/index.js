@@ -157,7 +157,6 @@ Page({
       title: '加入房间',
       editable: true,
       placeholderText: '请输入房间号',
-      type: 'digit',
       success: async (res) => {
         if (res.confirm) {
           const roomCode = res.content.trim();
