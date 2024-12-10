@@ -14,7 +14,9 @@ Page({
     activeTab: 'transactions',
     isFirstShow: true,  // 添加标记位
     showNicknameModal: false,
-    newNickname: ''
+    newNickname: '',
+    showSettleModal: false,
+    settleAmount: ''
   },
 
   /**
@@ -219,61 +221,9 @@ Page({
 
   // 结算操作
   async handleSettle() {
-    wx.showModal({
-      title: '结算',
-      editable: true,
-      placeholderText: '请输入最终筹码',
-      success: async (res) => {
-        if (res.confirm) {
-          const finalAmount = Number(res.content);
-          if (isNaN(finalAmount)) {
-            wx.showToast({
-              title: '请输入有效数字',
-              icon: 'none'
-            });
-            return;
-          }
-
-          try {
-            wx.showLoading({
-              title: '结算中...',
-              mask: true
-            });
-
-            const result = await app.call({
-              path: '/api/room/settle',
-              method: 'POST',
-              data: {
-                roomId: this.data.roomInfo.roomId,
-                finalAmount: finalAmount
-              }
-            });
-
-            wx.hideLoading();
-
-            if (result.retCode === 'SUCCESS') {
-              wx.showToast({
-                title: '结算成功',
-                icon: 'success'
-              });
-              // 刷新房间数据
-              this.joinRoom(this.data.roomInfo.roomId);
-            } else {
-              wx.showToast({
-                title: '结算失败',
-                icon: 'none'
-              });
-            }
-          } catch (error) {
-            wx.hideLoading();
-            console.error('结算操作失败:', error);
-            wx.showToast({
-              title: '结算失败',
-              icon: 'none'
-            });
-          }
-        }
-      }
+    this.setData({
+      showSettleModal: true,
+      settleAmount: ''
     });
   },
 
@@ -405,6 +355,80 @@ Page({
       console.error('修改昵称失败:', error);
       wx.showToast({
         title: '修改昵称失败',
+        icon: 'none'
+      });
+    }
+  },
+
+  onSettleAmountInput(e) {
+    this.setData({
+      settleAmount: e.detail.value
+    });
+  },
+
+  onCloseSettleModal() {
+    this.setData({
+      showSettleModal: false,
+      settleAmount: ''
+    });
+  },
+
+  async onConfirmSettle() {
+    const { settleAmount } = this.data;
+    const finalAmount = Number(settleAmount);
+    
+    if (!settleAmount.trim()) {
+      wx.showToast({
+        title: '请输入筹码数量',
+        icon: 'none'
+      });
+      return;
+    }
+
+    if (isNaN(finalAmount)) {
+      wx.showToast({
+        title: '请输入有效数字',
+        icon: 'none'
+      });
+      return;
+    }
+
+    try {
+      wx.showLoading({
+        title: '结算中...',
+        mask: true
+      });
+
+      const result = await app.call({
+        path: '/api/room/settle',
+        method: 'POST',
+        data: {
+          roomId: this.data.roomInfo.roomId,
+          finalAmount: finalAmount
+        }
+      });
+
+      wx.hideLoading();
+
+      if (result.retCode === 'SUCCESS') {
+        this.onCloseSettleModal();
+        wx.showToast({
+          title: '结算成功',
+          icon: 'success'
+        });
+        // 刷新房间数据
+        this.joinRoom(this.data.roomInfo.roomId);
+      } else {
+        wx.showToast({
+          title: '结算失败',
+          icon: 'none'
+        });
+      }
+    } catch (error) {
+      wx.hideLoading();
+      console.error('结算操作失败:', error);
+      wx.showToast({
+        title: '结算失败',
         icon: 'none'
       });
     }

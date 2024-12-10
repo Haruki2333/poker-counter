@@ -161,4 +161,30 @@
       </view>
     </view>
   </view>
+
+  <!-- 结算弹窗 -->
+  <view class="nickname-modal" wx:if="{{showSettleModal}}">
+    <view class="modal-mask" bindtap="onCloseSettleModal"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">结算</text>
+        <text class="modal-close" bindtap="onCloseSettleModal">×</text>
+      </view>
+      <view class="modal-body">
+        <view class="input-group">
+          <text class="input-label">最终筹码</text>
+          <input class="input-control" 
+            type="number"
+            placeholder="请输入最终筹码" 
+            value="{{settleAmount}}"
+            bindinput="onSettleAmountInput"
+          />
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn cancel-btn" bindtap="onCloseSettleModal">取消</button>
+        <button class="modal-btn confirm-btn" bindtap="onConfirmSettle">确定</button>
+      </view>
+    </view>
+  </view>
 </view>
