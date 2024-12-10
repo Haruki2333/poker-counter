@@ -12,7 +12,9 @@ Page({
     transactionRecords: [],
     allPlayerDetails: [],
     activeTab: 'transactions',
-    isFirstShow: true  // 添加标记位
+    isFirstShow: true,  // 添加标记位
+    showNicknameModal: false,
+    newNickname: ''
   },
 
   /**
@@ -325,52 +327,10 @@ Page({
   },
 
   // 在 Page 对象中添加以下方法
-  async handleUpdateNickname() {
-    wx.showModal({
-      title: '修改昵称',
-      editable: true,
-      placeholderText: '请输入新的昵称',
-      success: async (res) => {
-        if (res.confirm && res.content) {
-          try {
-            wx.showLoading({
-              title: '更新中...',
-              mask: true
-            });
-
-            const result = await app.call({
-              path: '/api/user/update-nickname',
-              method: 'POST',
-              data: {
-                nickname: res.content
-              }
-            });
-
-            wx.hideLoading();
-
-            if (result.retCode === 'SUCCESS') {
-              wx.showToast({
-                title: '昵称修改成功',
-                icon: 'success'
-              });
-              // 刷新房间数据以更新显示
-              this.joinRoom(this.data.roomInfo.roomId);
-            } else {
-              wx.showToast({
-                title: '昵称修改失败',
-                icon: 'none'
-              });
-            }
-          } catch (error) {
-            wx.hideLoading();
-            console.error('修改昵称失败:', error);
-            wx.showToast({
-              title: '修改昵称失败',
-              icon: 'none'
-            });
-          }
-        }
-      }
+  handleUpdateNickname() {
+    this.setData({
+      showNicknameModal: true,
+      newNickname: this.data.userDetail.userNickname || ''
     });
   },
 
@@ -385,4 +345,68 @@ Page({
       'userDetail.profitLoss': profitLoss
     });
   },
+
+  onCloseModal() {
+    this.setData({
+      showNicknameModal: false,
+      newNickname: ''
+    });
+  },
+
+  onNicknameInput(e) {
+    this.setData({
+      newNickname: e.detail.value
+    });
+  },
+
+  async onConfirmUpdateNickname() {
+    const { newNickname } = this.data;
+    
+    if (!newNickname.trim()) {
+      wx.showToast({
+        title: '请输入昵称',
+        icon: 'none'
+      });
+      return;
+    }
+
+    try {
+      wx.showLoading({
+        title: '更新中...',
+        mask: true
+      });
+
+      const result = await app.call({
+        path: '/api/user/update-nickname',
+        method: 'POST',
+        data: {
+          nickname: newNickname.trim()
+        }
+      });
+
+      wx.hideLoading();
+
+      if (result.retCode === 'SUCCESS') {
+        this.onCloseModal();
+        wx.showToast({
+          title: '昵称修改成功',
+          icon: 'success'
+        });
+        // 刷新房间数据以更新显示
+        this.joinRoom(this.data.roomInfo.roomId);
+      } else {
+        wx.showToast({
+          title: '昵称修改失败',
+          icon: 'none'
+        });
+      }
+    } catch (error) {
+      wx.hideLoading();
+      console.error('修改昵称失败:', error);
+      wx.showToast({
+        title: '修改昵称失败',
+        icon: 'none'
+      });
+    }
+  }
 })
