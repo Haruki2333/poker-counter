@@ -76,5 +76,17 @@ App({
     const minute = timeStr.substring(10, 12);
     
     return `${parseInt(month)}月${parseInt(day)}日 ${hour}:${minute}`;
+  },
+  getStringLength(str){
+    let len = 0;
+    for (let i = 0; i < str.length; i++) {
+      const code = str.charCodeAt(i);
+      if (code >= 0 && code <= 128) {
+        len += 1;
+      } else {
+        len += 2;
+      }
+    }
+    return len;
   }
 });

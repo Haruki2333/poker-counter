@@ -86,9 +86,34 @@ Page({
 
   // 监听房间名称输入
   onRoomNameInput(e) {
-    this.setData({
-      roomName: e.detail.value
-    })
+    const value = e.detail.value;
+    const len = app.getStringLength(value);
+    
+    if (len > 32) {
+      // 如果超出长度限制，截取合适长度的字符串
+      let validStr = '';
+      let currentLen = 0;
+      
+      for (let i = 0; i < value.length; i++) {
+        const char = value[i];
+        const charLen = app.getStringLength(char);
+        
+        if (currentLen + charLen <= 32) {
+          validStr += char;
+          currentLen += charLen;
+        } else {
+          break;
+        }
+      }
+      
+      this.setData({
+        roomName: validStr
+      });
+    } else {
+      this.setData({
+        roomName: value
+      });
+    }
   },
 
   // 监听码量输入
@@ -170,6 +195,14 @@ Page({
           if (!roomCode) {
             wx.showToast({
               title: '请输入房间号',
+              icon: 'none'
+            });
+            return;
+          }
+          // 添加房间号格式校验
+          if (!/^\d{6}$/.test(roomCode)) {
+            wx.showToast({
+              title: '房间号必须是6位数字',
               icon: 'none'
             });
             return;
