@@ -2,11 +2,7 @@
   <!-- 标题区域 -->
   <view class="header">
     <view class="title-line">
-      <text>记录带入 </text>
-      <image class="title-icon" src="/assets/icons/cart.svg" mode="aspectFit"></image>
-    </view>
-    <view class="title-line">
-      <text>精准结算 </text>
+      <text>扑克计分器 </text>
       <image class="title-icon" src="/assets/icons/thumbs-up.svg" mode="aspectFit"></image>
     </view>
   </view>

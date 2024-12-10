@@ -1,4 +1,3 @@
 {
-  "navigationBarTitleText": "计分器",
-  "backgroundColor": "#f7f7f7"
+  "disableScroll":true
 }

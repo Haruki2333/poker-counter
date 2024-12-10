@@ -3,7 +3,7 @@
   <!-- 顶部房间信息 -->
   <view class="room-header">
     <view class="room-name">
-      <image class="room-icon" src="/assets/icons/diamond.svg" mode="aspectFit"></image>
+      <image class="room-icon" src="/assets/icons/spade.svg" mode="aspectFit"></image>
       <text>{{roomInfo.roomName}}</text>
       <image class="room-icon" src="/assets/icons/diamond.svg" mode="aspectFit"></image>
     </view>
