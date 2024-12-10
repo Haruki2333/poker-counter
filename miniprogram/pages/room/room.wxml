@@ -149,7 +149,7 @@
           <text class="input-label">新昵称</text>
           <input class="input-control" 
             type="text"
-            placeholder="请输入新的昵称" 
+            placeholder="{{userDetail.userNickname}}"
             value="{{newNickname}}"
             bindinput="onNicknameInput"
           />

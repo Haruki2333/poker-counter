@@ -330,7 +330,7 @@ Page({
   handleUpdateNickname() {
     this.setData({
       showNicknameModal: true,
-      newNickname: this.data.userDetail.userNickname || ''
+      newNickname: ''
     });
   },
 
