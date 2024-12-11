@@ -144,16 +144,22 @@
   display: flex;
   justify-content: space-between;
   padding: 10rpx 20rpx;
+  align-items: center;
 }
 
 .label {
   color: #666;
+  flex: none;
+  margin-right: 20rpx;
 }
 
 .value {
   font-weight: 500;
   min-width: 160rpx;
   text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .btn-disabled {
@@ -284,6 +290,12 @@
 .nickname-text {
   text-decoration: underline;
   cursor: pointer;
+  flex: 1;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 300rpx;
 }
 
 .input-amount {
