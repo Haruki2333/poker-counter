@@ -97,6 +97,11 @@
 
 .room-name-col {
   flex: 0 0 180rpx;
+  max-width: 180rpx;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .chip-amount-col {
