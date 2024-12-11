@@ -427,6 +427,14 @@ Page({
       return;
     }
 
+    if (finalAmount > 100000000) {
+      wx.showToast({
+        title: '结算金额不能超过1亿',
+        icon: 'none'
+      });
+      return;
+    }
+
     try {
       wx.showLoading({
         title: '结算中...',

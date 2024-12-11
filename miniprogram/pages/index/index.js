@@ -135,10 +135,17 @@ Page({
       })
       return
     }
-
     if (!chipAmount || isNaN(chipAmount)) {
       wx.showToast({
         title: '请输入正确的筹码',
+        icon: 'none'
+      })
+      return
+    }
+
+    if (Number(chipAmount) > 1000000) {
+      wx.showToast({
+        title: '每手筹码不能超过100万',
         icon: 'none'
       })
       return
