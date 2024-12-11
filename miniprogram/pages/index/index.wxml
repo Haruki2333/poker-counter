@@ -2,7 +2,7 @@
   <!-- 标题区域 -->
   <view class="header">
     <view class="title-line">
-      <text>扑克计分器 </text>
+      <text>筹码记录器</text>
       <image class="title-icon" src="/assets/icons/thumbs-up.svg" mode="aspectFit"></image>
     </view>
   </view>
