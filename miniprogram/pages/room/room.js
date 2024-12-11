@@ -305,33 +305,22 @@ Page({
 
   onNicknameInput(e) {
     const value = e.detail.value;
-    const len = app.getStringLength(value);
+    let validStr = '';
+    let currentLen = 0;
     
-    if (len > 12) {
-      // 如果超出长度限制，截取合适长度的字符串
-      let validStr = '';
-      let currentLen = 0;
-      
-      for (let i = 0; i < value.length; i++) {
-        const char = value[i];
-        const charLen = app.getStringLength(char);
-        
-        if (currentLen + charLen <= 12) {
-          validStr += char;
-          currentLen += charLen;
-        } else {
-          break;
-        }
+    for (let char of value) {
+      const charLen = app.getStringLength(char);
+      if (currentLen + charLen <= 12) {
+        validStr += char;
+        currentLen += charLen;
+      } else {
+        break;
       }
-      
-      this.setData({
-        newNickname: validStr
-      });
-    } else {
-      this.setData({
-        newNickname: value
-      });
     }
+    
+    this.setData({
+      newNickname: validStr
+    });
   },
 
   async onConfirmUpdateNickname() {

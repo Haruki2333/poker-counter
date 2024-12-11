@@ -88,33 +88,22 @@ Page({
   // 监听房间名称输入
   onRoomNameInput(e) {
     const value = e.detail.value;
-    const len = app.getStringLength(value);
+    let validStr = '';
+    let currentLen = 0;
     
-    if (len > 32) {
-      // 如果超出长度限制，截取合适长度的字符串
-      let validStr = '';
-      let currentLen = 0;
-      
-      for (let i = 0; i < value.length; i++) {
-        const char = value[i];
-        const charLen = app.getStringLength(char);
-        
-        if (currentLen + charLen <= 32) {
-          validStr += char;
-          currentLen += charLen;
-        } else {
-          break;
-        }
+    for (let char of value) {
+      const charLen = app.getStringLength(char);
+      if (currentLen + charLen <= 32) {
+        validStr += char;
+        currentLen += charLen;
+      } else {
+        break;
       }
-      
-      this.setData({
-        roomName: validStr
-      });
-    } else {
-      this.setData({
-        roomName: value
-      });
     }
+    
+    this.setData({
+      roomName: validStr
+    });
   },
 
   // 监听码量输入

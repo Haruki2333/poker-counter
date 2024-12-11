@@ -77,14 +77,14 @@ App({
     
     return `${parseInt(month)}月${parseInt(day)}日 ${hour}:${minute}`;
   },
-  getStringLength(str){
+  getStringLength(str) {
     let len = 0;
-    for (let i = 0; i < str.length; i++) {
-      const code = str.charCodeAt(i);
-      if (code >= 0 && code <= 128) {
-        len += 1;
+    for (let char of str) {
+      // 使用正则表达式判断是否为ASCII字符
+      if (/^[\x00-\xff]$/.test(char)) {
+        len += 1;  // ASCII字符算1个长度
       } else {
-        len += 2;
+        len += 2;  // 其他字符（包括emoji和中文）算2个长度
       }
     }
     return len;
