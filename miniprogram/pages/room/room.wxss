@@ -90,12 +90,12 @@
 }
 
 .time-col {
-  flex: 0 0 200rpx;
+  flex: 0 0 180rpx;
   padding-left: 20rpx;
 }
 
 .user-col {
-  flex: 0 0 160rpx;
+  flex: 0 0 180rpx;
 }
 
 .type-col {

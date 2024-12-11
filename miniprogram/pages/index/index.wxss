@@ -87,7 +87,7 @@
 }
 
 .room-code-col {
-  flex: 0 0 140rpx;
+  flex: 0 0 120rpx;
   padding-left: 20rpx;
 }
 
@@ -96,7 +96,7 @@
 }
 
 .room-name-col {
-  flex: 0 0 160rpx;
+  flex: 0 0 180rpx;
 }
 
 .chip-amount-col {
