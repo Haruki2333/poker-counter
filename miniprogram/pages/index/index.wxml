@@ -57,6 +57,7 @@
             placeholder="请输入房间名称" 
             value="{{roomName}}"
             bindinput="onRoomNameInput"
+            focus="{{showCreateModal}}"
           />
         </view>
         <view class="input-group">
@@ -93,6 +94,7 @@
             placeholder="请输入6位数字房间号" 
             value="{{roomCode}}"
             bindinput="onRoomCodeInput"
+            focus="{{showJoinModal}}"
           />
         </view>
       </view>

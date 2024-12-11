@@ -152,6 +152,7 @@
             placeholder="{{userDetail.userNickname}}"
             value="{{newNickname}}"
             bindinput="onNicknameInput"
+            focus="{{showNicknameModal}}"
           />
         </view>
       </view>
@@ -178,6 +179,7 @@
             placeholder="请输入最终筹码" 
             value="{{settleAmount}}"
             bindinput="onSettleAmountInput"
+            focus="{{showSettleModal}}"
           />
         </view>
       </view>
