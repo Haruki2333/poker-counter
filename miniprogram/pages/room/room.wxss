@@ -278,7 +278,7 @@
 }
 
 .player-col.nickname {
-  flex: 1.2;
+  flex: 1.5;
   text-align: left;
   padding-left: 20rpx;
 }
