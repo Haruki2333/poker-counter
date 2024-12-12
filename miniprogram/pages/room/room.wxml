@@ -112,7 +112,8 @@
                  type="digit" 
                  value="{{userDetail.finalAmount || ''}}"
                  bindinput="handleFinalAmountInput"
-                 placeholder="请输入"/>
+                 placeholder="请输入"
+                 maxlength="12"/>
         </block>
         <block wx:else>
           <text class="value">{{userDetail.finalAmount}}</text>
