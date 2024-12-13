@@ -64,6 +64,7 @@
           <text class="input-label">每手筹码</text>
           <input class="input-control" 
             type="number"
+            maxlength="6"
             placeholder="请输入每手筹码" 
             value="{{chipAmount}}"
             bindinput="onChipAmountInput"

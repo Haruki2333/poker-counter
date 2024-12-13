@@ -16,7 +16,9 @@ Page({
     showNicknameModal: false,
     newNickname: '',
     showSettleModal: false,
-    settleAmount: ''
+    settleAmount: '',
+    showBuyInModal: false,
+    buyInHands: ''
   },
 
   /**
@@ -180,43 +182,10 @@ Page({
 
   // 带入操作
   async handleBuyIn() {
-    try {
-      wx.showLoading({
-        title: '处理中...',
-        mask: true
-      });
-
-      const result = await app.call({
-        path: '/api/room/buyIn',
-        method: 'POST',
-        data: {
-          roomId: this.data.roomInfo.roomId
-        }
-      });
-
-      wx.hideLoading();
-
-      if (result.retCode === 'SUCCESS') {
-        wx.showToast({
-          title: '带入成功',
-          icon: 'success'
-        });
-        // 刷新房间数据
-        this.joinRoom(this.data.roomInfo.roomId);
-      } else {
-        wx.showToast({
-          title: '带入失败',
-          icon: 'none'
-        });
-      }
-    } catch (error) {
-      wx.hideLoading();
-      console.error('带入操作失败:', error);
-      wx.showToast({
-        title: '带入失败',
-        icon: 'none'
-      });
-    }
+    this.setData({
+      showBuyInModal: true,
+      buyInHands: ''
+    });
   },
 
   // 结算操作
@@ -460,6 +429,88 @@ Page({
       console.error('结算操作失败:', error);
       wx.showToast({
         title: '结算失败',
+        icon: 'none'
+      });
+    }
+  },
+
+  onBuyInHandsInput(e) {
+    this.setData({
+      buyInHands: e.detail.value
+    });
+  },
+
+  onCloseBuyInModal() {
+    this.setData({
+      showBuyInModal: false,
+      buyInHands: ''
+    });
+  },
+
+  async onConfirmBuyIn() {
+    const { buyInHands } = this.data;
+    const hands = Number(buyInHands);
+    
+    if (!buyInHands.trim()) {
+      wx.showToast({
+        title: '请输入手数',
+        icon: 'none'
+      });
+      return;
+    }
+
+    if (isNaN(hands) || hands <= 0) {
+      wx.showToast({
+        title: '请输入有效数字',
+        icon: 'none'
+      });
+      return;
+    }
+
+    if (hands > 10) {
+      wx.showToast({
+        title: '单次带入不能超过10手',
+        icon: 'none'
+      });
+      return;
+    }
+
+    try {
+      wx.showLoading({
+        title: '处理中...',
+        mask: true
+      });
+
+      const result = await app.call({
+        path: '/api/room/buyIn',
+        method: 'POST',
+        data: {
+          roomId: this.data.roomInfo.roomId,
+          hands: hands
+        }
+      });
+
+      wx.hideLoading();
+
+      if (result.retCode === 'SUCCESS') {
+        this.onCloseBuyInModal();
+        wx.showToast({
+          title: '带入成功',
+          icon: 'success'
+        });
+        // 刷新房间数据
+        this.joinRoom(this.data.roomInfo.roomId);
+      } else {
+        wx.showToast({
+          title: '带入失败',
+          icon: 'none'
+        });
+      }
+    } catch (error) {
+      wx.hideLoading();
+      console.error('带入操作失败:', error);
+      wx.showToast({
+        title: '带入失败',
         icon: 'none'
       });
     }

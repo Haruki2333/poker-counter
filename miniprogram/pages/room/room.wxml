@@ -177,6 +177,7 @@
           <text class="input-label">最终筹码</text>
           <input class="input-control" 
             type="number"
+            maxlength="8"
             placeholder="请输入最终筹码" 
             value="{{settleAmount}}"
             bindinput="onSettleAmountInput"
@@ -187,6 +188,34 @@
       <view class="modal-footer">
         <button class="modal-btn cancel-btn" bindtap="onCloseSettleModal">取消</button>
         <button class="modal-btn confirm-btn" bindtap="onConfirmSettle">确定</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 带入弹窗 -->
+  <view class="nickname-modal" wx:if="{{showBuyInModal}}">
+    <view class="modal-mask" bindtap="onCloseBuyInModal"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">带入</text>
+        <text class="modal-close" bindtap="onCloseBuyInModal">×</text>
+      </view>
+      <view class="modal-body">
+        <view class="input-group">
+          <text class="input-label">带入手数</text>
+          <input class="input-control" 
+            type="number"
+            maxlength="1"
+            placeholder="请输入带入手数" 
+            value="{{buyInHands}}"
+            bindinput="onBuyInHandsInput"
+            focus="{{showBuyInModal}}"
+          />
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn cancel-btn" bindtap="onCloseBuyInModal">取消</button>
+        <button class="modal-btn confirm-btn" bindtap="onConfirmBuyIn">确定</button>
       </view>
     </view>
   </view>
