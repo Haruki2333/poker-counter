@@ -449,16 +449,9 @@ Page({
 
   async onConfirmBuyIn() {
     const { buyInHands } = this.data;
-    const hands = Number(buyInHands);
+    // 如果用户没有输入,默认为1手
+    const hands = buyInHands.trim() ? Number(buyInHands) : 1;
     
-    if (!buyInHands.trim()) {
-      wx.showToast({
-        title: '请输入手数',
-        icon: 'none'
-      });
-      return;
-    }
-
     if (isNaN(hands) || hands <= 0) {
       wx.showToast({
         title: '请输入有效数字',
@@ -467,9 +460,9 @@ Page({
       return;
     }
 
-    if (hands > 10) {
+    if (hands > 99) {
       wx.showToast({
-        title: '单次带入不能超过10手',
+        title: '单次带入不能超过99手',
         icon: 'none'
       });
       return;

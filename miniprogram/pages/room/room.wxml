@@ -177,7 +177,7 @@
           <text class="input-label">最终筹码</text>
           <input class="input-control" 
             type="number"
-            maxlength="8"
+            maxlength="9"
             placeholder="请输入最终筹码" 
             value="{{settleAmount}}"
             bindinput="onSettleAmountInput"
@@ -205,8 +205,8 @@
           <text class="input-label">带入手数</text>
           <input class="input-control" 
             type="number"
-            maxlength="1"
-            placeholder="请输入带入手数" 
+            maxlength="2"
+            placeholder="默认1手" 
             value="{{buyInHands}}"
             bindinput="onBuyInHandsInput"
             focus="{{showBuyInModal}}"
