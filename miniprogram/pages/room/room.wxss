@@ -264,6 +264,11 @@
 
 .players-scroll {
   flex: 1;
+  height: 0;
+}
+
+.players-items {
+  width: 100%;
 }
 
 .player-item {
