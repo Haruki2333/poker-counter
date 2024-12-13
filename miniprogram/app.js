@@ -1,12 +1,23 @@
 // app.js
 App({
   async onLaunch() {
-    // 这里演示如何在app.js中使用，没有用请删掉
-    // const res = await this.call({
-    //   path:'/',
-    //   method: 'POST'
-    // })
-    // console.log('业务返回结果',res)
+    // 检查版本更新
+    if (wx.canIUse('getUpdateManager')) {
+      const updateManager = wx.getUpdateManager()
+      updateManager.onCheckForUpdate(function (res) {
+        if (res.hasUpdate) {
+          updateManager.onUpdateReady(function () {
+            updateManager.applyUpdate()
+          })
+          updateManager.onUpdateFailed(function () {
+            wx.showModal({
+              title: '已经有新版本了',
+              content: '新版本已经上线，请您删除当前小程序，重新搜索打开'
+            })
+          })
+        }
+      })
+    }
   },
   /**
    * 封装的微信云托管调用方法
