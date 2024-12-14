@@ -71,14 +71,14 @@
                      enhanced="true" 
                      show-scrollbar="true">
           <view class="players-items">
-            <view class="player-item" 
+            <view class="player-item {{item.settlementStatus === 'T' ? 'player-item-total' : ''}}" 
                   wx:for="{{allPlayerDetails}}" 
                   wx:key="userId">
               <view class="player-col nickname">{{item.userNickname}}</view>
               <view class="player-col">{{item.buyIn}}</view>
-              <view class="player-col">{{item.settlementStatus === 'S' ? item.finalAmount : '/'}}</view>
-              <view class="player-col">{{item.settlementStatus === 'S' ? (item.profitLoss > 0 ? '+' + item.profitLoss : item.profitLoss) : '/'}}</view>
-              <view class="player-col status">{{item.settlementStatus === 'S' ? '已结算' : '进行中'}}</view>
+              <view class="player-col">{{item.settlementStatus === 'S' || item.settlementStatus === 'T' ? item.finalAmount : '/'}}</view>
+              <view class="player-col">{{item.settlementStatus === 'S' || item.settlementStatus === 'T' ? (item.profitLoss > 0 ? '+' + item.profitLoss : item.profitLoss) : '/'}}</view>
+              <view class="player-col status">{{item.settlementStatus === 'S' ? '已结算' : (item.settlementStatus === 'T' ? '/' : '进行中')}}</view>
             </view>
           </view>
         </scroll-view>
