@@ -32,6 +32,14 @@ Page({
     })
   },
 
+  // 分享给朋友
+  onShareAppMessage() {
+    return {
+      title: '快来一起记录筹码吧', // 分享标题
+      path: '/pages/index/index' // 分享页面路径
+    }
+  },
+
   // 获取最近房间列表
   async getRecentRooms() {
     try {
