@@ -12,7 +12,6 @@ Page({
     transactionRecords: [],
     allPlayerDetails: [],
     activeTab: 'transactions',
-    isFirstShow: true,  // 添加标记位
     showNicknameModal: false,
     newNickname: '',
     showSettleModal: false,
@@ -67,13 +66,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    // 只有非首次显示时才刷新房间列表
-    if (!this.data.isFirstShow) {
-      this.joinRoom(this.data.roomInfo.roomId);
-    }
-    this.setData({
-      isFirstShow: false
-    })
+    
   },
 
   /**
