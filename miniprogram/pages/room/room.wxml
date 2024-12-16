@@ -31,65 +31,69 @@
       </view>
     </view>
 
-    <!-- 流水记录内容 -->
-    <view class="tab-content {{activeTab === 'transactions' ? '' : 'hidden'}}">
-      <view class="transaction-list">
-        <view class="transaction-header">
-          <view class="col time-col">时间</view>
-          <view class="col user-col">玩家</view>
-          <view class="col type-col">类型</view>
-          <view class="col amount-col">筹码</view>
-        </view>
-        <scroll-view scroll-y="true" 
-                     class="transaction-scroll" 
-                     enhanced="true" 
-                     show-scrollbar="true"
-                     refresher-enabled="{{true}}"
-                     refresher-triggered="{{refreshingTransactions}}"
-                     bindrefresherrefresh="onTransactionsRefresh">
-          <view class="transaction-items">
-            <view class="transaction-item {{item.isRecent ? 'recent-record' : ''}}" 
-                  wx:for="{{transactionRecords}}" 
-                  wx:key="timestamp">
-              <view class="col time-col">{{item.formattedTime}}</view>
-              <view class="col user-col">{{item.userNickname}}</view>
-              <view class="col type-col">{{item.actionType}}</view>
-              <view class="col amount-col">{{item.actionType === '取消结算' ? '/' : item.actionAmount}}</view>
-            </view>
+    <!-- 添加一个滑动容器 -->
+    <view class="tab-content-wrapper" 
+          style="transform: translateX({{activeTab === 'transactions' ? '0' : '-50%'}})">
+      <!-- 流水记录内容 -->
+      <view class="tab-content">
+        <view class="transaction-list">
+          <view class="transaction-header">
+            <view class="col time-col">时间</view>
+            <view class="col user-col">玩家</view>
+            <view class="col type-col">类型</view>
+            <view class="col amount-col">筹码</view>
           </view>
-        </scroll-view>
+          <scroll-view scroll-y="true" 
+                       class="transaction-scroll" 
+                       enhanced="true" 
+                       show-scrollbar="true"
+                       refresher-enabled="{{true}}"
+                       refresher-triggered="{{refreshingTransactions}}"
+                       bindrefresherrefresh="onTransactionsRefresh">
+            <view class="transaction-items">
+              <view class="transaction-item {{item.isRecent ? 'recent-record' : ''}}" 
+                    wx:for="{{transactionRecords}}" 
+                    wx:key="timestamp">
+                <view class="col time-col">{{item.formattedTime}}</view>
+                <view class="col user-col">{{item.userNickname}}</view>
+                <view class="col type-col">{{item.actionType}}</view>
+                <view class="col amount-col">{{item.actionType === '取消结算' ? '/' : item.actionAmount}}</view>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
       </view>
-    </view>
 
-    <!-- 玩家列表内容 -->
-    <view class="tab-content {{activeTab === 'players' ? '' : 'hidden'}}">
-      <view class="players-list">
-        <view class="players-header">
-          <view class="player-col nickname">玩家</view>
-          <view class="player-col">带入</view>
-          <view class="player-col">当前</view>
-          <view class="player-col">盈亏</view>
-          <view class="player-col status">状态</view>
-        </view>
-        <scroll-view scroll-y="true" 
-                     class="players-scroll" 
-                     enhanced="true" 
-                     show-scrollbar="true"
-                     refresher-enabled="{{true}}"
-                     refresher-triggered="{{refreshingPlayers}}"
-                     bindrefresherrefresh="onPlayersRefresh">
-          <view class="players-items">
-            <view class="player-item {{item.settlementStatus === 'T' ? 'player-item-total' : ''}}" 
-                  wx:for="{{allPlayerDetails}}" 
-                  wx:key="userId">
-              <view class="player-col nickname">{{item.userNickname}}</view>
-              <view class="player-col">{{item.buyIn}}</view>
-              <view class="player-col">{{item.settlementStatus === 'S' || item.settlementStatus === 'T' ? item.finalAmount : '/'}}</view>
-              <view class="player-col">{{item.settlementStatus === 'S' || item.settlementStatus === 'T' ? (item.profitLoss > 0 ? '+' + item.profitLoss : item.profitLoss) : '/'}}</view>
-              <view class="player-col status">{{item.settlementStatus === 'S' ? '已结算' : (item.settlementStatus === 'T' ? '/' : '进行中')}}</view>
-            </view>
+      <!-- 玩家列表内容 -->
+      <view class="tab-content">
+        <view class="players-list">
+          <view class="players-header">
+            <view class="player-col nickname">玩家</view>
+            <view class="player-col">带入</view>
+            <view class="player-col">当前</view>
+            <view class="player-col">盈亏</view>
+            <view class="player-col status">状态</view>
           </view>
-        </scroll-view>
+          <scroll-view scroll-y="true" 
+                       class="players-scroll" 
+                       enhanced="true" 
+                       show-scrollbar="true"
+                       refresher-enabled="{{true}}"
+                       refresher-triggered="{{refreshingPlayers}}"
+                       bindrefresherrefresh="onPlayersRefresh">
+            <view class="players-items">
+              <view class="player-item {{item.settlementStatus === 'T' ? 'player-item-total' : ''}}" 
+                    wx:for="{{allPlayerDetails}}" 
+                    wx:key="userId">
+                <view class="player-col nickname">{{item.userNickname}}</view>
+                <view class="player-col">{{item.buyIn}}</view>
+                <view class="player-col">{{item.settlementStatus === 'S' || item.settlementStatus === 'T' ? item.finalAmount : '/'}}</view>
+                <view class="player-col">{{item.settlementStatus === 'S' || item.settlementStatus === 'T' ? (item.profitLoss > 0 ? '+' + item.profitLoss : item.profitLoss) : '/'}}</view>
+                <view class="player-col status">{{item.settlementStatus === 'S' ? '已结算' : (item.settlementStatus === 'T' ? '/' : '进行中')}}</view>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
       </view>
     </view>
   </view>
