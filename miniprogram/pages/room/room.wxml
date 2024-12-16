@@ -14,7 +14,9 @@
   </view>
 
   <!-- 中部内容区域 -->
-  <view class="content-area">
+  <view class="content-area" 
+        bindtouchstart="handleTouchStart" 
+        bindtouchend="handleTouchEnd">
     <!-- Tab 切换器 -->
     <view class="tab-header">
       <view class="tab-item {{activeTab === 'transactions' ? 'active' : ''}}" 

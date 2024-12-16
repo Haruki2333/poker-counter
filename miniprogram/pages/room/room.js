@@ -17,7 +17,9 @@ Page({
     showSettleModal: false,
     settleAmount: '',
     showBuyInModal: false,
-    buyInHands: ''
+    buyInHands: '',
+    touchStartX: 0, // 触摸开始位置
+    touchEndX: 0,   // 触摸结束位置
   },
 
   /**
@@ -499,6 +501,33 @@ Page({
         title: '带入失败',
         icon: 'none'
       });
+    }
+  },
+
+  // 添加触摸事件处理函数
+  handleTouchStart(e) {
+    this.setData({
+      touchStartX: e.touches[0].clientX
+    });
+  },
+
+  handleTouchEnd(e) {
+    const touchEndX = e.changedTouches[0].clientX;
+    const moveX = touchEndX - this.data.touchStartX;
+    
+    // 判断滑动方向和距离(大于50像素才触发)
+    if (Math.abs(moveX) > 50) {
+      if (moveX > 0) {
+        // 向右滑动，切换到前一个tab
+        if (this.data.activeTab === 'players') {
+          this.setData({ activeTab: 'transactions' });
+        }
+      } else {
+        // 向左滑动，切换到后一个tab
+        if (this.data.activeTab === 'transactions') {
+          this.setData({ activeTab: 'players' });
+        }
+      }
     }
   }
 })
