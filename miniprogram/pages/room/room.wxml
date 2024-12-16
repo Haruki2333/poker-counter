@@ -43,7 +43,10 @@
         <scroll-view scroll-y="true" 
                      class="transaction-scroll" 
                      enhanced="true" 
-                     show-scrollbar="true">
+                     show-scrollbar="true"
+                     refresher-enabled="{{true}}"
+                     refresher-triggered="{{refreshingTransactions}}"
+                     bindrefresherrefresh="onTransactionsRefresh">
           <view class="transaction-items">
             <view class="transaction-item {{item.isRecent ? 'recent-record' : ''}}" 
                   wx:for="{{transactionRecords}}" 
@@ -71,7 +74,10 @@
         <scroll-view scroll-y="true" 
                      class="players-scroll" 
                      enhanced="true" 
-                     show-scrollbar="true">
+                     show-scrollbar="true"
+                     refresher-enabled="{{true}}"
+                     refresher-triggered="{{refreshingPlayers}}"
+                     bindrefresherrefresh="onPlayersRefresh">
           <view class="players-items">
             <view class="player-item {{item.settlementStatus === 'T' ? 'player-item-total' : ''}}" 
                   wx:for="{{allPlayerDetails}}" 

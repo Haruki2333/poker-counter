@@ -56,11 +56,13 @@
 }
 
 .transaction-scroll {
+  height: 100%;
   flex: 1;
   position: relative;
 }
 
 .transaction-items {
+  width: 100%;
   position: absolute;
   left: 0;
   right: 0;
@@ -263,8 +265,8 @@
 }
 
 .players-scroll {
+  height: 100%;
   flex: 1;
-  height: 0;
 }
 
 .players-items {

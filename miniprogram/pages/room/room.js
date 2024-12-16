@@ -20,6 +20,8 @@ Page({
     buyInHands: '',
     touchStartX: 0, // 触摸开始位置
     touchEndX: 0,   // 触摸结束位置
+    refreshingTransactions: false, // 流水记录刷新状态
+    refreshingPlayers: false      // 玩家列表刷新状态
   },
 
   /**
@@ -528,6 +530,26 @@ Page({
           this.setData({ activeTab: 'players' });
         }
       }
+    }
+  },
+
+  // 流水记录下拉刷新
+  async onTransactionsRefresh() {
+    this.setData({ refreshingTransactions: true });
+    try {
+      await this.joinRoom(this.data.roomInfo.roomId);
+    } finally {
+      this.setData({ refreshingTransactions: false });
+    }
+  },
+
+  // 玩家列表下拉刷新
+  async onPlayersRefresh() {
+    this.setData({ refreshingPlayers: true });
+    try {
+      await this.joinRoom(this.data.roomInfo.roomId);
+    } finally {
+      this.setData({ refreshingPlayers: false });
     }
   }
 })
