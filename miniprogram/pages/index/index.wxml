@@ -58,16 +58,6 @@
             focus="{{showCreateModal}}"
           />
         </view>
-        <view class="input-group">
-          <text class="input-label">每手筹码</text>
-          <input class="input-control" 
-            type="number"
-            maxlength="6"
-            placeholder="请输入每手筹码" 
-            value="{{chipAmount}}"
-            bindinput="onChipAmountInput"
-          />
-        </view>
       </view>
       <view class="modal-footer">
         <button class="modal-btn cancel-btn" bindtap="onCloseModal">取消</button>

@@ -87,8 +87,8 @@
 }
 
 .room-code-col {
-  flex: 1;
-  min-width: 180rpx;
+  flex: 0.6;
+  min-width: 100rpx;
   padding-left: 20rpx;
 }
 
@@ -97,7 +97,7 @@
 }
 
 .room-name-col {
-  flex: 1.2;
+  flex: 1.4;
   min-width: 200rpx;
   display: block;
   overflow: hidden;

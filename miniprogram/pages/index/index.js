@@ -6,9 +6,8 @@ Page({
     showCreateModal: false,
     showJoinModal: false,
     roomName: '',
-    chipAmount: '',
     roomCode: '',
-    isFirstShow: true  // 添加标记位
+    isFirstShow: true
   },
 
   onLoad(options) {
@@ -88,7 +87,6 @@ Page({
       showCreateModal: false,
       showJoinModal: false,
       roomName: '',
-      chipAmount: '',
       roomCode: ''
     })
   },
@@ -114,35 +112,13 @@ Page({
     });
   },
 
-  // 监听码量输入
-  onChipAmountInput(e) {
-    this.setData({
-      chipAmount: e.detail.value
-    })
-  },
-
   // 确认创建房间
   async onConfirmCreate() {
-    const { roomName, chipAmount } = this.data
+    const { roomName } = this.data
 
     if (!roomName.trim()) {
       wx.showToast({
         title: '请输入房间名称',
-        icon: 'none'
-      })
-      return
-    }
-    if (!chipAmount || isNaN(chipAmount)) {
-      wx.showToast({
-        title: '请输入正确的筹码',
-        icon: 'none'
-      })
-      return
-    }
-
-    if (Number(chipAmount) > 1000000) {
-      wx.showToast({
-        title: '每手筹码不能超过100万',
         icon: 'none'
       })
       return
@@ -158,8 +134,7 @@ Page({
         path: '/api/room/create',
         method: 'POST',
         data: {
-          roomName: roomName.trim(),
-          chipAmount: Number(chipAmount)
+          roomName: roomName.trim()
         }
       })
 
