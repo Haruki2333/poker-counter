@@ -58,6 +58,11 @@
   border-bottom: 2rpx solid #eee;
 }
 
+.room-header .col {
+  justify-content: center;
+  text-align: center;
+}
+
 .room-items {
   position: absolute;
   left: 0;
@@ -272,4 +277,24 @@
 
 .confirm-btn {
   color: #576b95 !important;
+}
+
+.room-item .col {
+  justify-content: center;
+  text-align: center;
+}
+
+.room-item .room-code-col {
+  justify-content: center;
+}
+
+.room-code-link {
+  text-decoration: underline;
+  text-align: center;
+}
+
+.room-item .room-name-col {
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
