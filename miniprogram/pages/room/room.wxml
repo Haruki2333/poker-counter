@@ -9,7 +9,6 @@
     </view>
     <view class="room-info">
       <text>房间号：{{roomInfo.roomCode}}</text>
-      <text>每手筹码：{{roomInfo.chipAmount}}</text>
     </view>
   </view>
 
