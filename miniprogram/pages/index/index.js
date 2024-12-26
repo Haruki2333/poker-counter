@@ -99,7 +99,7 @@ Page({
     
     for (let char of value) {
       const charLen = app.getStringLength(char);
-      if (currentLen + charLen <= 32) {
+      if (currentLen + charLen <= 20) {
         validStr += char;
         currentLen += charLen;
       } else {
