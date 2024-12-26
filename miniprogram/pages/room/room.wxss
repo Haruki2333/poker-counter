@@ -467,3 +467,21 @@
   color: #999;
   font-weight: 500;
 }
+
+/* 流水记录表头和内容居中 */
+.transaction-header .col,
+.transaction-item .col {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 玩家列表表头和内容居中 */
+.players-header .player-col,
+.player-item .player-col {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
