@@ -13,7 +13,6 @@
     <view class="room-header">
       <view class="col room-code-col">房间号</view>
       <view class="col room-name-col">房间名称</view>
-      <view class="col chip-amount-col">每手筹码</view>
       <view class="col create-time-col">创建时间</view>
     </view>
     <!-- 使用scroll-view包裹列表内容 -->
@@ -28,7 +27,6 @@
             <text class="room-code-link" bindtap="onTapRoomCode" data-room-code="{{item.roomCode}}">{{item.roomCode}}</text>
           </view>
           <view class="col room-name-col">{{item.roomName}}</view>
-          <view class="col chip-amount-col">{{item.chipAmount}}</view>
           <view class="col create-time-col">{{item.createdTime}}</view>
         </view>
       </view>

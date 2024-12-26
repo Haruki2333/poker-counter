@@ -87,7 +87,8 @@
 }
 
 .room-code-col {
-  flex: 0 0 120rpx;
+  flex: 1;
+  min-width: 180rpx;
   padding-left: 20rpx;
 }
 
@@ -96,20 +97,17 @@
 }
 
 .room-name-col {
-  flex: 0 0 180rpx;
-  max-width: 180rpx;
+  flex: 1.2;
+  min-width: 200rpx;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.chip-amount-col {
-  flex: 0 0 120rpx;
-}
-
 .create-time-col {
   flex: 1;
+  min-width: 180rpx;
   padding-right: 20rpx;
 }
 
