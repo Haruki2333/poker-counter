@@ -214,13 +214,13 @@
       </view>
       <view class="modal-body">
         <view class="input-group">
-          <text class="input-label">带入手数</text>
+          <text class="input-label">带入筹码</text>
           <input class="input-control" 
             type="number"
-            maxlength="2"
-            placeholder="默认1手" 
-            value="{{buyInHands}}"
-            bindinput="onBuyInHandsInput"
+            maxlength="9"
+            placeholder="请输入带入筹码" 
+            value="{{buyInAmount}}"
+            bindinput="onBuyInAmountInput"
             focus="{{showBuyInModal}}"
           />
         </view>

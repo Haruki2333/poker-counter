@@ -17,7 +17,7 @@ Page({
     showSettleModal: false,
     settleAmount: '',
     showBuyInModal: false,
-    buyInHands: '',
+    buyInAmount: '',
     touchStartX: 0, // 触摸开始位置
     touchEndX: 0,   // 触摸结束位置
     refreshingTransactions: false, // 流水记录刷新状态
@@ -181,7 +181,7 @@ Page({
   async handleBuyIn() {
     this.setData({
       showBuyInModal: true,
-      buyInHands: ''
+      buyInAmount: ''
     });
   },
 
@@ -431,25 +431,32 @@ Page({
     }
   },
 
-  onBuyInHandsInput(e) {
+  onBuyInAmountInput(e) {
     this.setData({
-      buyInHands: e.detail.value
+      buyInAmount: e.detail.value
     });
   },
 
   onCloseBuyInModal() {
     this.setData({
       showBuyInModal: false,
-      buyInHands: ''
+      buyInAmount: ''
     });
   },
 
   async onConfirmBuyIn() {
-    const { buyInHands } = this.data;
-    // 如果用户没有输入,默认为1手
-    const hands = buyInHands.trim() ? Number(buyInHands) : 1;
+    const { buyInAmount } = this.data;
+    const amount = Number(buyInAmount);
     
-    if (isNaN(hands) || hands <= 0) {
+    if (!buyInAmount.trim()) {
+      wx.showToast({
+        title: '请输入带入筹码',
+        icon: 'none'
+      });
+      return;
+    }
+
+    if (isNaN(amount) || amount <= 0) {
       wx.showToast({
         title: '请输入有效数字',
         icon: 'none'
@@ -457,9 +464,9 @@ Page({
       return;
     }
 
-    if (hands > 99) {
+    if (amount > 100000000) {
       wx.showToast({
-        title: '单次带入不能超过99手',
+        title: '带入金额不能超过1亿',
         icon: 'none'
       });
       return;
@@ -476,7 +483,7 @@ Page({
         method: 'POST',
         data: {
           roomId: this.data.roomInfo.roomId,
-          hands: hands
+          buyInAmount: amount
         }
       });
 
