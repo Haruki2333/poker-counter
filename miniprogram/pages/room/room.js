@@ -49,13 +49,16 @@ Page({
           isRecent
         };
       }) : [];
-      
+
       this.setData({
         roomInfo: roomData.roomInfo,
         userDetail: roomData.userDetail,
         transactionRecords: formattedRecords,
         allPlayerDetails: roomData.allPlayerDetails
       });
+    } else if (options.roomCode) {
+      // 通过分享链接直接进入房间
+      this.joinRoomByCode(options.roomCode);
     }
   },
 
@@ -109,7 +112,7 @@ Page({
     const roomName = this.data.roomInfo.roomName || '好友房间';
     return {
       title: `邀请你加入【${roomName}】`,
-      path: `/pages/index/index?roomCode=${roomCode}`,
+      path: `/pages/room/room?roomCode=${roomCode}`,
       success: function(res) {
         wx.showToast({
           title: '分享成功',
@@ -172,6 +175,62 @@ Page({
       console.error('刷新房间数据失败:', error)
       wx.showToast({
         title: '刷新数据失败',
+        icon: 'none'
+      })
+    }
+  },
+
+  // 通过房间码加入房间（分享进入）
+  async joinRoomByCode(roomCode) {
+    try {
+      wx.showLoading({
+        title: '进入中...',
+        mask: true
+      })
+
+      const result = await app.call({
+        path: '/api/room/join',
+        method: 'POST',
+        data: { roomCode }
+      })
+
+      wx.hideLoading()
+
+      if (result.retCode === 'SUCCESS') {
+        const now = new Date();
+        const formattedRecords = result.data.transactionRecords.map(record => {
+          const recordTime = new Date(
+            record.timestamp.substring(0, 4),
+            record.timestamp.substring(4, 6)-1,
+            record.timestamp.substring(6, 8),
+            record.timestamp.substring(8, 10),
+            record.timestamp.substring(10, 12),
+            record.timestamp.substring(12, 14)
+          );
+          return {
+            ...record,
+            formattedTime: app.formatTime(record.timestamp),
+            isRecent: (now - recordTime) <= 10 * 60 * 1000
+          };
+        });
+
+        this.setData({
+          roomInfo: result.data.roomInfo,
+          userDetail: result.data.userDetail,
+          transactionRecords: formattedRecords,
+          allPlayerDetails: result.data.allPlayerDetails
+        });
+      } else {
+        wx.showToast({
+          title: '进入房间失败',
+          icon: 'none'
+        })
+      }
+    } catch (error) {
+      wx.hideLoading()
+      console.error('进入房间失败:', error)
+      wx.showToast({
+        title: '进入房间失败',
         icon: 'none'
       })
     }
