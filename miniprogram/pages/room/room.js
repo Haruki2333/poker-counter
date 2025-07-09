@@ -56,6 +56,9 @@ Page({
         transactionRecords: formattedRecords,
         allPlayerDetails: roomData.allPlayerDetails
       });
+    } else if (options.roomCode) {
+      // 从分享链接进入，通过房间码加载数据
+      this.joinRoom(options.roomCode, true);
     }
   },
 
@@ -109,7 +112,7 @@ Page({
     const roomName = this.data.roomInfo.roomName || '好友房间';
     return {
       title: `邀请你加入【${roomName}】`,
-      path: `/pages/index/index?roomCode=${roomCode}`,
+      path: `/pages/room/room?roomCode=${roomCode}`,
       success: function(res) {
         wx.showToast({
           title: '分享成功',
@@ -120,7 +123,7 @@ Page({
   },
 
   // 加入房间刷新数据
-  async joinRoom(roomId) {
+  async joinRoom(identifier, byCode = false) {
     try {
       wx.showLoading({
         title: '刷新中...',
@@ -130,7 +133,7 @@ Page({
       const result = await app.call({
         path: '/api/room/join',
         method: 'POST',
-        data: { roomId }
+        data: byCode ? { roomCode: identifier } : { roomId: identifier }
       })
 
       wx.hideLoading()
